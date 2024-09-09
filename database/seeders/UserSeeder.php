@@ -14,12 +14,28 @@ class UserSeeder extends Seeder
      */
     public function run(): void
     {
-        User::create([
+        $user = User::create([
             'name' => 'John Doe',
             'email' => 'user@gmail.com',
             'password' => bcrypt('password'),
         ]);
+        $imageSize = config('gravatar.image_size');
 
-        User::factory()->count(100)->create();
+        $user->avatar = 'https://www.gravatar.com/avatar/' . md5(strtolower(trim($user->email))) . '?s=' . $imageSize . '&d=identicon';
+        $user->save();
+
+
+        $user = User::create([
+            'name' => 'Test User',
+            'email' => 'test@example.com',
+            'password' => bcrypt('password'),
+        ]);
+        $user->avatar = 'https://www.gravatar.com/avatar/' . md5(strtolower(trim($user->email))) . '?s=' . $imageSize . '&d=identicon';
+        $user->save();
+
+        User::factory()->count(100)->create()->each(function (User $user) use ($imageSize) {
+            $user->avatar = 'https://www.gravatar.com/avatar/' . md5(strtolower(trim($user->email))) . '?s=' . $imageSize . '&d=identicon';
+            $user->save();
+        });
     }
 }

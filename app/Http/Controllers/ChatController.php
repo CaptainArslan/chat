@@ -3,10 +3,27 @@
 namespace App\Http\Controllers;
 
 use App\Models\Chat;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class ChatController extends Controller
 {
+    public function index()
+    {
+        $users = User::get();
+        return view('dashboard', get_defined_vars());
+    }
+
+    public function chats()
+    {
+        $chats = auth()->user()->chats()
+            ->with('participants')
+            ->withCount('messages')
+            ->latest()
+            ->get();
+
+        return response()->json($chats);
+    }
     public function createGroupChat(Request $request)
     {
         $chat = Chat::create([

@@ -9,17 +9,17 @@
     <meta content="Coderthemes" name="author" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <!-- App favicon -->
-    <link rel="shortcut icon" href="assets/images/favicon.ico">
+    <link rel="shortcut icon" href="/assets/images/favicon.ico">
     @vite(['resources/js/app.js'])
 
     <!-- Bootstrap css -->
-    <link href="assets/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <link href="/assets/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
     <!-- App css -->
-    <link href="assets/css/app.min.css" rel="stylesheet" type="text/css" id="app-style" />
+    <link href="/assets/css/app.min.css" rel="stylesheet" type="text/css" id="app-style" />
     <!-- icons -->
-    <link href="assets/css/icons.min.css" rel="stylesheet" type="text/css" />
+    <link href="/assets/css/icons.min.css" rel="stylesheet" type="text/css" />
     <!-- Head js -->
-    <script src="assets/js/head.js"></script>
+    <script src="/assets/js/head.js"></script>
 
     <!-- Scripts -->
 
@@ -82,8 +82,8 @@
                                         <a href="javascript:void(0);" class="dropdown-item notify-item">
                                             <div class="d-flex align-items-start">
                                                 <img class="d-flex me-2 rounded-circle"
-                                                    src="assets/images/users/user-2.jpg" alt="Generic placeholder image"
-                                                    height="32">
+                                                    src="/assets/images/users/user-2.jpg"
+                                                    alt="Generic placeholder image" height="32">
                                                 <div class="w-100">
                                                     <h5 class="m-0 font-14">Erwin E. Brown</h5>
                                                     <span class="font-12 mb-0">UI Designer</span>
@@ -95,8 +95,8 @@
                                         <a href="javascript:void(0);" class="dropdown-item notify-item">
                                             <div class="d-flex align-items-start">
                                                 <img class="d-flex me-2 rounded-circle"
-                                                    src="assets/images/users/user-5.jpg" alt="Generic placeholder image"
-                                                    height="32">
+                                                    src="/assets/images/users/user-5.jpg"
+                                                    alt="Generic placeholder image" height="32">
                                                 <div class="w-100">
                                                     <h5 class="m-0 font-14">Jacob Deo</h5>
                                                     <span class="font-12 mb-0">Developer</span>
@@ -143,19 +143,19 @@
                                 <div class="row g-0">
                                     <div class="col">
                                         <a class="dropdown-icon-item" href="#">
-                                            <img src="assets/images/brands/slack.png" alt="slack">
+                                            <img src="/assets/images/brands/slack.png" alt="slack">
                                             <span>Slack</span>
                                         </a>
                                     </div>
                                     <div class="col">
                                         <a class="dropdown-icon-item" href="#">
-                                            <img src="assets/images/brands/github.png" alt="Github">
+                                            <img src="/assets/images/brands/github.png" alt="Github">
                                             <span>GitHub</span>
                                         </a>
                                     </div>
                                     <div class="col">
                                         <a class="dropdown-icon-item" href="#">
-                                            <img src="assets/images/brands/dribbble.png" alt="dribbble">
+                                            <img src="/assets/images/brands/dribbble.png" alt="dribbble">
                                             <span>Dribbble</span>
                                         </a>
                                     </div>
@@ -164,19 +164,19 @@
                                 <div class="row g-0">
                                     <div class="col">
                                         <a class="dropdown-icon-item" href="#">
-                                            <img src="assets/images/brands/bitbucket.png" alt="bitbucket">
+                                            <img src="/assets/images/brands/bitbucket.png" alt="bitbucket">
                                             <span>Bitbucket</span>
                                         </a>
                                     </div>
                                     <div class="col">
                                         <a class="dropdown-icon-item" href="#">
-                                            <img src="assets/images/brands/dropbox.png" alt="dropbox">
+                                            <img src="/assets/images/brands/dropbox.png" alt="dropbox">
                                             <span>Dropbox</span>
                                         </a>
                                     </div>
                                     <div class="col">
                                         <a class="dropdown-icon-item" href="#">
-                                            <img src="assets/images/brands/g-suite.png" alt="G Suite">
+                                            <img src="/assets/images/brands/g-suite.png" alt="G Suite">
                                             <span>G Suite</span>
                                         </a>
                                     </div>
@@ -191,31 +191,31 @@
                         <a class="nav-link dropdown-toggle arrow-none waves-effect waves-light"
                             data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="false"
                             aria-expanded="false">
-                            <img src="assets/images/flags/us.jpg" alt="user-image" height="16">
+                            <img src="/assets/images/flags/us.jpg" alt="user-image" height="16">
                         </a>
                         <div class="dropdown-menu dropdown-menu-end">
 
                             <!-- item-->
                             <a href="javascript:void(0);" class="dropdown-item">
-                                <img src="assets/images/flags/germany.jpg" alt="user-image" class="me-1"
+                                <img src="/assets/images/flags/germany.jpg" alt="user-image" class="me-1"
                                     height="12"> <span class="align-middle">German</span>
                             </a>
 
                             <!-- item-->
                             <a href="javascript:void(0);" class="dropdown-item">
-                                <img src="assets/images/flags/italy.jpg" alt="user-image" class="me-1"
+                                <img src="/assets/images/flags/italy.jpg" alt="user-image" class="me-1"
                                     height="12"> <span class="align-middle">Italian</span>
                             </a>
 
                             <!-- item-->
                             <a href="javascript:void(0);" class="dropdown-item">
-                                <img src="assets/images/flags/spain.jpg" alt="user-image" class="me-1"
+                                <img src="/assets/images/flags/spain.jpg" alt="user-image" class="me-1"
                                     height="12"> <span class="align-middle">Spanish</span>
                             </a>
 
                             <!-- item-->
                             <a href="javascript:void(0);" class="dropdown-item">
-                                <img src="assets/images/flags/russia.jpg" alt="user-image" class="me-1"
+                                <img src="/assets/images/flags/russia.jpg" alt="user-image" class="me-1"
                                     height="12"> <span class="align-middle">Russian</span>
                             </a>
 
@@ -246,7 +246,7 @@
                                 <!-- item-->
                                 <a href="javascript:void(0);" class="dropdown-item notify-item active">
                                     <div class="notify-icon">
-                                        <img src="assets/images/users/user-1.jpg" class="img-fluid rounded-circle"
+                                        <img src="/assets/images/users/user-1.jpg" class="img-fluid rounded-circle"
                                             alt="" />
                                     </div>
                                     <p class="notify-details">Cristina Pride</p>
@@ -268,7 +268,7 @@
                                 <!-- item-->
                                 <a href="javascript:void(0);" class="dropdown-item notify-item">
                                     <div class="notify-icon">
-                                        <img src="assets/images/users/user-4.jpg" class="img-fluid rounded-circle"
+                                        <img src="/assets/images/users/user-4.jpg" class="img-fluid rounded-circle"
                                             alt="" />
                                     </div>
                                     <p class="notify-details">Karen Robinson</p>
@@ -323,7 +323,7 @@
                         <a class="nav-link dropdown-toggle nav-user me-0 waves-effect waves-light"
                             data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="false"
                             aria-expanded="false">
-                            <img src="assets/images/users/user-1.jpg" alt="user-image" class="rounded-circle">
+                            <img src="/assets/images/users/user-1.jpg" alt="user-image" class="rounded-circle">
                             <span class="pro-user-name ms-1">
                                 Geneva <i class="mdi mdi-chevron-down"></i>
                             </span>
@@ -375,21 +375,21 @@
                 <div class="logo-box">
                     <a href="index.html" class="logo logo-dark text-center">
                         <span class="logo-sm">
-                            <img src="assets/images/logo-sm.png" alt="" height="22">
+                            <img src="/assets/images/logo-sm.png" alt="" height="22">
                             <!-- <span class="logo-lg-text-light">UBold</span> -->
                         </span>
                         <span class="logo-lg">
-                            <img src="assets/images/logo-dark.png" alt="" height="20">
+                            <img src="/assets/images/logo-dark.png" alt="" height="20">
                             <!-- <span class="logo-lg-text-light">U</span> -->
                         </span>
                     </a>
 
                     <a href="index.html" class="logo logo-light text-center">
                         <span class="logo-sm">
-                            <img src="assets/images/logo-sm.png" alt="" height="22">
+                            <img src="/assets/images/logo-sm.png" alt="" height="22">
                         </span>
                         <span class="logo-lg">
-                            <img src="assets/images/logo-light.png" alt="" height="20">
+                            <img src="/assets/images/logo-light.png" alt="" height="20">
                         </span>
                     </a>
                 </div>
@@ -600,7 +600,7 @@
                                 <div class="card-body">
 
                                     <div class="d-flex align-items-start mb-3">
-                                        <img src="assets/images/users/user-1.jpg" class="me-2 rounded-circle"
+                                        <img src="/assets/images/users/user-1.jpg" class="me-2 rounded-circle"
                                             height="42" alt="Brandon Smith">
                                         <div class="w-100">
                                             <h5 class="mt-0 mb-0 font-15">
@@ -644,29 +644,32 @@
                                     <div class="row">
                                         <div class="col">
                                             <div data-simplebar style="max-height: 375px;">
-                                                <a href="javascript:void(0);" class="text-body">
-                                                    <div class="d-flex align-items-start p-2">
-                                                        <img src="assets/images/users/user-2.jpg"
-                                                            class="me-2 rounded-circle" height="42"
-                                                            alt="Brandon Smith" />
-                                                        <div class="w-100">
-                                                            <h5 class="mt-0 mb-0 font-14">
-                                                                <span
-                                                                    class="float-end text-muted fw-normal font-12">4:30am</span>
-                                                                Brandon Smith
-                                                            </h5>
-                                                            <p class="mt-1 mb-0 text-muted font-14">
-                                                                <span class="w-25 float-end text-end"><span
-                                                                        class="badge badge-soft-danger">3</span></span>
-                                                                <span class="w-75">How are you today?</span>
-                                                            </p>
+                                                @forelse ($users as $user)
+                                                    <a href="javascript:void(0);" class="text-body">
+                                                        <div class="d-flex align-items-start p-2">
+                                                            <img src="{{ $user->avatar ? $user->avatar : '/assets/images/users/user-2.jpg' }} "
+                                                                class="me-2 rounded-circle" height="42"
+                                                                alt="Brandon Smith" />
+                                                            <div class="w-100">
+                                                                <h5 class="mt-0 mb-0 font-14">
+                                                                    <span
+                                                                        class="float-end text-muted fw-normal font-12">4:30am</span>
+                                                                    {{ $user->name }}
+                                                                </h5>
+                                                                <p class="mt-1 mb-0 text-muted font-14">
+                                                                    <span class="w-25 float-end text-end"><span
+                                                                            class="badge badge-soft-danger">3</span></span>
+                                                                    <span class="w-75">How are you today?</span>
+                                                                </p>
+                                                            </div>
                                                         </div>
-                                                    </div>
-                                                </a>
+                                                    </a>
+                                                @empty
+                                                @endforelse
 
                                                 <a href="javascript:void(0);" class="text-body">
                                                     <div class="d-flex align-items-start p-2">
-                                                        <img src="assets/images/users/user-5.jpg"
+                                                        <img src="/assets/images/users/user-5.jpg"
                                                             class="me-2 rounded-circle" height="42"
                                                             alt="James Z" />
                                                         <div class="w-100">
@@ -685,7 +688,7 @@
 
                                                 <a href="javascript:void(0);" class="text-body">
                                                     <div class="d-flex align-items-start p-2">
-                                                        <img src="assets/images/users/user-7.jpg"
+                                                        <img src="/assets/images/users/user-7.jpg"
                                                             class="me-2 rounded-circle" height="42"
                                                             alt="Maria C" />
                                                         <div class="w-100">
@@ -706,7 +709,7 @@
 
                                                 <a href="javascript:void(0);" class="text-body">
                                                     <div class="d-flex align-items-start bg-light p-2">
-                                                        <img src="assets/images/users/user-10.jpg"
+                                                        <img src="/assets/images/users/user-10.jpg"
                                                             class="me-2 rounded-circle" height="42"
                                                             alt="Rhonda D" />
                                                         <div class="w-100">
@@ -725,7 +728,7 @@
 
                                                 <a href="javascript:void(0);" class="text-body">
                                                     <div class="d-flex align-items-start p-2">
-                                                        <img src="assets/images/users/user-3.jpg"
+                                                        <img src="/assets/images/users/user-3.jpg"
                                                             class="me-2 rounded-circle" height="42"
                                                             alt="Michael H" />
                                                         <div class="w-100">
@@ -744,7 +747,7 @@
 
                                                 <a href="javascript:void(0);" class="text-body">
                                                     <div class="d-flex align-items-start p-2">
-                                                        <img src="assets/images/users/user-6.jpg"
+                                                        <img src="/assets/images/users/user-6.jpg"
                                                             class="me-2 rounded-circle" height="42"
                                                             alt="Thomas R" />
                                                         <div class="w-100">
@@ -763,7 +766,7 @@
 
                                                 <a href="javascript:void(0);" class="text-body">
                                                     <div class="d-flex align-items-start p-2">
-                                                        <img src="assets/images/users/user-8.jpg"
+                                                        <img src="/assets/images/users/user-8.jpg"
                                                             class="me-2 rounded-circle" height="42"
                                                             alt="Thomas J" />
                                                         <div class="w-100">
@@ -781,7 +784,7 @@
 
                                                 <a href="javascript:void(0);" class="text-body">
                                                     <div class="d-flex align-items-start p-2">
-                                                        <img src="assets/images/users/user-4.jpg"
+                                                        <img src="/assets/images/users/user-4.jpg"
                                                             class="me-2 rounded-circle" height="42"
                                                             alt="Ricky J" />
                                                         <div class="w-100">
@@ -816,9 +819,8 @@
                                     <div class="row justify-content-between py-1">
                                         <div class="col-sm-7">
                                             <div class="d-flex align-items-start">
-                                                <img src="assets/images/users/user-5.jpg"
-                                                    class="me-2 rounded-circle" height="36"
-                                                    alt="Brandon Smith">
+                                                <img src="/assets/images/users/user-5.jpg" class="me-2 rounded-circle"
+                                                    height="36" alt="Brandon Smith">
                                                 <div>
                                                     <h5 class="mt-0 mb-0 font-15">
                                                         <a href="contacts-profile.html" class="text-reset">James
@@ -864,7 +866,7 @@
                                     <ul class="conversation-list" data-simplebar style="max-height: 460px;">
                                         <li class="clearfix">
                                             <div class="chat-avatar">
-                                                <img src="assets/images/users/user-5.jpg" class="rounded"
+                                                <img src="/assets/images/users/user-5.jpg" class="rounded"
                                                     alt="James Z" />
                                                 <i>10:00</i>
                                             </div>
@@ -890,7 +892,7 @@
                                         </li>
                                         <li class="clearfix odd">
                                             <div class="chat-avatar">
-                                                <img src="assets/images/users/user-1.jpg" class="rounded"
+                                                <img src="/assets/images/users/user-1.jpg" class="rounded"
                                                     alt="Geneva M" />
                                                 <i>10:01</i>
                                             </div>
@@ -916,7 +918,7 @@
                                         </li>
                                         <li class="clearfix">
                                             <div class="chat-avatar">
-                                                <img src="assets/images/users/user-5.jpg" class="rounded"
+                                                <img src="/assets/images/users/user-5.jpg" class="rounded"
                                                     alt="James Z" />
                                                 <i>10:01</i>
                                             </div>
@@ -942,7 +944,7 @@
                                         </li>
                                         <li class="clearfix odd">
                                             <div class="chat-avatar">
-                                                <img src="assets/images/users/user-1.jpg" class="rounded"
+                                                <img src="/assets/images/users/user-1.jpg" class="rounded"
                                                     alt="Geneva M" />
                                                 <i>10:02</i>
                                             </div>
@@ -968,7 +970,7 @@
                                         </li>
                                         <li class="clearfix">
                                             <div class="chat-avatar">
-                                                <img src="assets/images/users/user-5.jpg" alt="James Z"
+                                                <img src="/assets/images/users/user-5.jpg" alt="James Z"
                                                     class="rounded" />
                                                 <i>10:02</i>
                                             </div>
@@ -994,7 +996,7 @@
                                         </li>
                                         <li class="clearfix odd">
                                             <div class="chat-avatar">
-                                                <img src="assets/images/users/user-1.jpg" alt="Geneva M"
+                                                <img src="/assets/images/users/user-1.jpg" alt="Geneva M"
                                                     class="rounded" />
                                                 <i>10:03</i>
                                             </div>
@@ -1020,7 +1022,7 @@
                                         </li>
                                         <li class="clearfix">
                                             <div class="chat-avatar">
-                                                <img src="assets/images/users/user-5.jpg" alt="James Z"
+                                                <img src="/assets/images/users/user-5.jpg" alt="James Z"
                                                     class="rounded" />
                                                 <i>10:04</i>
                                             </div>
@@ -1047,7 +1049,7 @@
                                         </li>
                                         <li class="clearfix">
                                             <div class="chat-avatar">
-                                                <img src="assets/images/users/user-5.jpg" alt="James Z"
+                                                <img src="/assets/images/users/user-5.jpg" alt="James Z"
                                                     class="rounded" />
                                                 <i>10:04</i>
                                             </div>
@@ -1074,7 +1076,7 @@
                                         </li>
                                         <li class="clearfix odd">
                                             <div class="chat-avatar">
-                                                <img src="assets/images/users/user-1.jpg" alt="Geneva M"
+                                                <img src="/assets/images/users/user-1.jpg" alt="Geneva M"
                                                     class="rounded" />
                                                 <i>10:05</i>
                                             </div>
@@ -1266,7 +1268,7 @@
                         <a href="javascript: void(0);" class="text-reset notification-item">
                             <div class="d-flex align-items-start noti-user-item">
                                 <div class="position-relative me-2">
-                                    <img src="assets/images/users/user-10.jpg" class="rounded-circle avatar-sm"
+                                    <img src="/assets/images/users/user-10.jpg" class="rounded-circle avatar-sm"
                                         alt="user-pic">
                                     <i class="mdi mdi-circle user-status online"></i>
                                 </div>
@@ -1282,7 +1284,7 @@
                         <a href="javascript: void(0);" class="text-reset notification-item">
                             <div class="d-flex align-items-start noti-user-item">
                                 <div class="position-relative me-2">
-                                    <img src="assets/images/users/user-1.jpg" class="rounded-circle avatar-sm"
+                                    <img src="/assets/images/users/user-1.jpg" class="rounded-circle avatar-sm"
                                         alt="user-pic">
                                     <i class="mdi mdi-circle user-status away"></i>
                                 </div>
@@ -1299,7 +1301,7 @@
                         <a href="javascript: void(0);" class="text-reset notification-item">
                             <div class="d-flex align-items-start noti-user-item">
                                 <div class="position-relative me-2">
-                                    <img src="assets/images/users/user-9.jpg" class="rounded-circle avatar-sm"
+                                    <img src="/assets/images/users/user-9.jpg" class="rounded-circle avatar-sm"
                                         alt="user-pic">
                                     <i class="mdi mdi-circle user-status busy"></i>
                                 </div>
@@ -1320,7 +1322,7 @@
                         <a href="javascript: void(0);" class="text-reset notification-item">
                             <div class="d-flex align-items-start noti-user-item">
                                 <div class="position-relative me-2">
-                                    <img src="assets/images/users/user-2.jpg" class="rounded-circle avatar-sm"
+                                    <img src="/assets/images/users/user-2.jpg" class="rounded-circle avatar-sm"
                                         alt="user-pic">
                                     <i class="mdi mdi-circle user-status online"></i>
                                 </div>
@@ -1336,7 +1338,7 @@
                         <a href="javascript: void(0);" class="text-reset notification-item">
                             <div class="d-flex align-items-start noti-user-item">
                                 <div class="position-relative me-2">
-                                    <img src="assets/images/users/user-4.jpg" class="rounded-circle avatar-sm"
+                                    <img src="/assets/images/users/user-4.jpg" class="rounded-circle avatar-sm"
                                         alt="user-pic">
                                     <i class="mdi mdi-circle user-status away"></i>
                                 </div>
@@ -1352,7 +1354,7 @@
                         <a href="javascript: void(0);" class="text-reset notification-item">
                             <div class="d-flex align-items-start noti-user-item">
                                 <div class="position-relative me-2">
-                                    <img src="assets/images/users/user-5.jpg" class="rounded-circle avatar-sm"
+                                    <img src="/assets/images/users/user-5.jpg" class="rounded-circle avatar-sm"
                                         alt="user-pic">
                                     <i class="mdi mdi-circle user-status online"></i>
                                 </div>
@@ -1369,7 +1371,7 @@
                         <a href="javascript: void(0);" class="text-reset notification-item">
                             <div class="d-flex align-items-start noti-user-item">
                                 <div class="position-relative me-2">
-                                    <img src="assets/images/users/user-6.jpg" class="rounded-circle avatar-sm"
+                                    <img src="/assets/images/users/user-6.jpg" class="rounded-circle avatar-sm"
                                         alt="user-pic">
                                     <i class="mdi mdi-circle user-status online"></i>
                                 </div>
@@ -1385,7 +1387,7 @@
                         <a href="javascript: void(0);" class="text-reset notification-item">
                             <div class="d-flex align-items-start noti-user-item">
                                 <div class="position-relative me-2">
-                                    <img src="assets/images/users/user-7.jpg" class="rounded-circle avatar-sm"
+                                    <img src="/assets/images/users/user-7.jpg" class="rounded-circle avatar-sm"
                                         alt="user-pic">
                                     <i class="mdi mdi-circle user-status busy"></i>
                                 </div>
@@ -1401,7 +1403,7 @@
                         <a href="javascript: void(0);" class="text-reset notification-item">
                             <div class="d-flex align-items-start noti-user-item">
                                 <div class="position-relative me-2">
-                                    <img src="assets/images/users/user-8.jpg" class="rounded-circle avatar-sm"
+                                    <img src="/assets/images/users/user-8.jpg" class="rounded-circle avatar-sm"
                                         alt="user-pic">
                                     <i class="mdi mdi-circle user-status away"></i>
                                 </div>
@@ -1572,10 +1574,10 @@
     <div class="rightbar-overlay"></div>
 
     <!-- Vendor js -->
-    <script src="assets/js/vendor.min.js"></script>
+    <script src="/assets/js/vendor.min.js"></script>
 
     <!-- App js -->
-    <script src="assets/js/app.min.js"></script>
+    <script src="/assets/js/app.min.js"></script>
 
 </body>
 

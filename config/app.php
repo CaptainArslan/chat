@@ -123,4 +123,10 @@ return [
         'store' => env('APP_MAINTENANCE_STORE', 'database'),
     ],
 
+    'gravatar' => [
+        'enabled' => true,
+        'image_size' => 200,
+        'imageset' => 'identicon',
+    ],
+
 ];
