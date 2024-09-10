@@ -8,7 +8,16 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/dashboard', [ChatController::class, 'index'])->middleware(['auth'])->name('dashboard');
+Route::middleware('auth')->group(function () {
+    Route::get('/dashboard', [ChatController::class, 'index'])->name('dashboard');
+    Route::Post('/search/users', [ChatController::class, 'search'])->name('search.user');
+    Route::get('get/user/{user}',  [ChatController::class, 'getUser'])->name('get.user');
+    Route::get('/chats', [ChatController::class, 'chats'])->name('chats');
+    Route::post('/chats', [ChatController::class, 'createGroupChat'])->name('chats.create');
+    Route::post('/chats/{chat}/messages', [ChatController::class, 'sendMessage'])->name('chats.messages.create');
+    Route::get('/users', [ChatController::class, 'getUsers'])->name('users');
+});
+
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
