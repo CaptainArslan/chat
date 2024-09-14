@@ -28,6 +28,10 @@ class AuthenticatedSessionController extends Controller
 
         $request->session()->regenerate();
 
+        Auth::user()->update([
+            'active' => true,
+        ]);
+
         return redirect()->intended(route('dashboard', absolute: false));
     }
 
@@ -38,9 +42,14 @@ class AuthenticatedSessionController extends Controller
     {
         Auth::guard('web')->logout();
 
+        Auth::user()->update([
+            'active' => false,
+        ]);
+
         $request->session()->invalidate();
 
         $request->session()->regenerateToken();
+
 
         return redirect('/');
     }
