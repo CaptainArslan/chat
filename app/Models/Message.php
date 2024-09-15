@@ -25,4 +25,11 @@ class Message extends Model
         return $this->belongsToMany(User::class, 'message_read_status')
             ->withTimestamps()->withPivot('read_at');
     }
+
+
+    // ================== Accessors ==================
+    public function getCreatedAtHumanAttribute()
+    {
+        return $this->created_at->diffForHumans();
+    }
 }

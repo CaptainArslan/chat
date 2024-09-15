@@ -49,21 +49,29 @@
                         <div class="row">
                             <div class="col">
                                 <div data-simplebar style="max-height: 500px;" id="chats">
-                                    @forelse ($users as $user)
+                                    @forelse ($chats as $chat)
                                         <a href="javascript:void(0);" class="text-body user-chat"
-                                            data-chat="{{ $user->id }}">
+                                            data-chat="{{ $chat->id }}">
                                             <div class="d-flex align-items-start p-2">
-                                                <img src="{{ $user->avatar ? $user->avatar : '/assets/images/users/user-2.jpg' }} "
+                                                <img src="{{ $chat->logo ? $chat->logo : '/assets/images/users/user-2.jpg' }} "
                                                     class="me-2 rounded-circle" height="42" alt="Brandon Smith" />
                                                 <div class="w-100">
                                                     <h5 class="mt-0 mb-0 font-14">
-                                                        <span class="float-end text-muted fw-normal font-12">4:30am</span>
-                                                        {{ $user->name }}
+                                                        <span class="float-end text-muted fw-normal font-12">
+                                                            {{ $chat->getlastMessageTime() }}
+                                                        </span>
+                                                        {{ $chat->name }}
+                                                        <small class="text-sm text-muted">
+                                                            ({{ $chat->is_group ? 'Group' : 'Individual' }})
+                                                        </small>
                                                     </h5>
                                                     <p class="mt-1 mb-0 text-muted font-14">
-                                                        <span class="w-25 float-end text-end"><span
-                                                                class="badge badge-soft-danger">3</span></span>
-                                                        <span class="w-75">How are you today?</span>
+                                                        <span class="w-25 float-end text-end">
+                                                            {{-- get the messages with unread statuses --}}
+                                                            <span class="badge badge-soft-danger">{{ $chat->messages_count }}</span>
+                                                        </span>
+                                                        <span class="w-75">{{ limitString($chat->getlastMessage(), 25) }}
+                                                        </span>
                                                     </p>
                                                 </div>
                                             </div>
@@ -99,6 +107,8 @@
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <script>
+        var authUser = @json($user);
+
         function debounce(func, delay) {
             let timeout;
             return function() {
@@ -155,9 +165,10 @@
                 dataType: 'json',
                 success: function(response) {
                     if (response.success) {
+                        console.log(response.data);
                         toggleLoader(false);
                         createChatHeader(response.data);
-                        createChatMessage(response.data);
+                        // createChatMessage(response.data);
                     }
                 },
                 error: function(error) {
@@ -168,24 +179,42 @@
         }
 
         // function to create chat box header
-        function createChatHeader(user) {
+        function createChatHeader(chat) {
 
             // Create the status as a span
-            let statusClass = user.active ? 'text-success' : 'text-danger';
-            let statusText = user.active ? 'Online' : 'Offline';
+            let statusClass = chat.active ? 'text-success' : 'text-danger';
+            let statusText = chat.active ? 'Online' : 'Offline';
+            let chatType = chat.is_group ? 'Group' : 'Individual';
+            let showgroup = ` <p class="mt-1 mb-0 text-muted font-12">
+                                    <span class="mdi mdi-circle ${statusClass}"></span> ${statusText}
+                                </p>
+                            `;
+
+            // Check if it's a group chat
+            if (chat.is_group) {
+                // Get participants' names and join them into a comma-separated string
+                let participants = chat.participants.map(participant => participant.name).join(', ');
+                // we have to limit the participants string to 100 characters
+                limitString(participants, 10);
+
+                // Update showgroup to display the comma-separated participants
+                showgroup = `
+                    <p class="mt-1 mb-0 text-muted font-12">
+                        Participants: ${participants}
+                    </p>
+                `;
+            }
 
             let html = `
                 <div class="row justify-content-between py-1">
                     <div class="col-sm-7">
                         <div class="d-flex align-items-start">
-                            <img src="${user.avatar}" class="me-2 rounded-circle" height="36" alt="${user.name}">
+                            <img src="${chat.logo}" class="me-2 rounded-circle" height="36" alt="${chat.name}">
                             <div>
                                 <h5 class="mt-0 mb-0 font-15">
-                                    <a href="javascript:void(0)" class="text-reset">${user.name}</a>
+                                    <a href="javascript:void(0)" class="text-reset">${chat.name} <small class="text-muted"> (${chatType}) </small>  </a>
                                 </h5>
-                                <p class="mt-1 mb-0 text-muted font-12">
-                                    <span class="mdi mdi-circle ${statusClass}"></span> ${statusText}
-                                </p>
+                                ${showgroup}
                             </div>
                         </div>
                     </div>
@@ -529,6 +558,16 @@
         // function to read messages
 
         // getUsers();
+
+        function limitString(str, limit, ending = '...') {
+            // Check if the string length exceeds the limit
+            if (str.length > limit) {
+                // Return the limited string with the ending
+                return str.substring(0, limit) + ending;
+            }
+            // Return the original string if it's within the limit
+            return str;
+        }
     </script>
 
 @endsection

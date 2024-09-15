@@ -23,18 +23,23 @@ class ChatSeeder extends Seeder
                     $users = User::inRandomOrder()->limit(rand(3, 5))->pluck('id');
                     $chat->participants()->attach($users);
                 } else {
-                    // For individual chats, ensure the chat with the same users doesn't already exist
-                    do {
-                        $user = User::inRandomOrder()->first();
-                        $existingChat = Chat::whereHas('participants', function ($query) use ($user) {
-                            $query->where('user_id', $user->id);
-                        })
-                            ->where('is_group', false) // Ensure it's not a group chat
-                            ->exists();
-                    } while ($existingChat);
+                    // For individual chats, attach a single user ensuring no duplicate chat exists
+                    $user = User::inRandomOrder()->first();
 
-                    // Attach the selected user to the chat
-                    $chat->participants()->attach($user->id);
+                    // Check if a chat already exists between the current chat's creator and this user
+                    $existingChat = Chat::whereHas('participants', function ($query) use ($user) {
+                        $query->where('user_id', $user->id);
+                    })
+                        ->whereHas('participants', function ($query) {
+                            $query->where('user_id', 1); // Assuming the current user is the authenticated one
+                        })
+                        ->where('is_group', false)
+                        ->first();
+
+                    // Only attach the user if no existing chat was found
+                    if (!$existingChat) {
+                        $chat->participants()->attach($user->id);
+                    }
                 }
             });
     }
