@@ -68,7 +68,8 @@
                                                     <p class="mt-1 mb-0 text-muted font-14">
                                                         <span class="w-25 float-end text-end">
                                                             {{-- get the messages with unread statuses --}}
-                                                            <span class="badge badge-soft-danger">{{ $chat->messages_count }}</span>
+                                                            <span
+                                                                class="badge badge-soft-danger">{{ $chat->messages_count }}</span>
                                                         </span>
                                                         <span class="w-75">{{ limitString($chat->getlastMessage(), 25) }}
                                                         </span>
@@ -151,7 +152,6 @@
             });
         }
 
-
         // function to get the conversations
         function createScene(id) {
             toggleLoader(true);
@@ -165,10 +165,12 @@
                 dataType: 'json',
                 success: function(response) {
                     if (response.success) {
-                        console.log(response.data);
                         toggleLoader(false);
                         createChatHeader(response.data);
-                        // createChatMessage(response.data);
+                        createChatMessage(response.data);
+                    } else {
+                        toggleLoader(false);
+                        console.error(response.message);
                     }
                 },
                 error: function(error) {
@@ -243,9 +245,54 @@
             $('#chat-header').removeClass('d-none');
         }
 
-        function createChatMessage(user) {
-            let html = `
-                <ul class="conversation-list" data-simplebar style="max-height: 460px;">
+        function createChatMessage(data) {
+
+            let messages = data.messages;
+
+            let html = `<ul class="conversation-list" data-simplebar style="max-height: 460px;">`;
+            messages.forEach((message, index) => {
+                if (index == 0) {
+                    console.log(message);
+                }
+                // let isOdd = index % 2 === 1 ? 'odd' : '';
+                let isOdd = (message.user.id === authUser.id) ? 'odd' : '';
+                console.log(isOdd);
+
+                let avatar = message.user.avatar ||
+                    '/assets/images/users/default.jpg'; // Default avatar if not provided
+                let timestamp = message.created_at; // Assuming this is in a format like '10:00'
+                let userName = message.user.name || 'Unknown User';
+                let messageText = message.message || '';
+                let time = message.created_at_human ?? message.created_at;
+                html += `
+                    <li class="clearfix ${isOdd}">
+                        <div class="chat-avatar">
+                            <img src="${avatar}" class="rounded"
+                                alt="${userName}" />
+                            <i>${time}</i>
+                        </div>
+                        <div class="conversation-text">
+                            <div class="ctext-wrap">
+                                <i>${userName} (${message.id})</i>
+                                <p>
+                                ${messageText}
+                                </p>
+                            </div>
+                        </div>
+                        <div class="conversation-actions dropdown">
+                            <button class="btn btn-sm btn-link" data-bs-toggle="dropdown"
+                                aria-expanded="false"><i
+                                    class="mdi mdi-dots-vertical font-16"></i></button>
+
+                            <div class="dropdown-menu dropdown-menu-end">
+                                <a class="dropdown-item" href="#">Copy Message</a>
+                                <a class="dropdown-item" href="#">Edit</a>
+                                <a class="dropdown-item" href="#">Delete</a>
+                            </div>
+                        </div>
+                    </li>`;
+            });
+            html += `
                     <li class="clearfix">
                         <div class="chat-avatar">
                             <img src="/assets/images/users/user-5.jpg" class="rounded"
@@ -274,13 +321,13 @@
                     </li>
                     <li class="clearfix odd">
                         <div class="chat-avatar">
-                            <img src="${user.avatar}" class="rounded"
-                                alt="${user.name}" />
+                            <img src="/assets/images/users/user-2.jpg" class="rounded"
+                                alt="User Name" />
                             <i>10:01</i>
                         </div>
                         <div class="conversation-text">
                             <div class="ctext-wrap">
-                                <i>${user.name}</i>
+                                <i>User Name</i>
                                 <p>
                                     Hi, How are you? What about our next meeting?
                                 </p>
@@ -292,137 +339,6 @@
                                     class="mdi mdi-dots-vertical font-16"></i></button>
 
                             <div class="dropdown-menu">
-                                <a class="dropdown-item" href="#">Copy Message</a>
-                                <a class="dropdown-item" href="#">Edit</a>
-                                <a class="dropdown-item" href="#">Delete</a>
-                            </div>
-                        </div>
-                    </li>
-                    <li class="clearfix">
-                        <div class="chat-avatar">
-                            <img src="/assets/images/users/user-5.jpg" class="rounded"
-                                alt="James Z" />
-                            <i>10:01</i>
-                        </div>
-                        <div class="conversation-text">
-                            <div class="ctext-wrap">
-                                <i>James Z</i>
-                                <p>
-                                    Yeah everything is fine
-                                </p>
-                            </div>
-                        </div>
-                        <div class="conversation-actions dropdown">
-                            <button class="btn btn-sm btn-link" data-bs-toggle="dropdown"
-                                aria-expanded="false"><i
-                                    class="mdi mdi-dots-vertical font-16"></i></button>
-
-                            <div class="dropdown-menu dropdown-menu-end">
-                                <a class="dropdown-item" href="#">Copy Message</a>
-                                <a class="dropdown-item" href="#">Edit</a>
-                                <a class="dropdown-item" href="#">Delete</a>
-                            </div>
-                        </div>
-                    </li>
-                    <li class="clearfix odd">
-                        <div class="chat-avatar">
-                            <img src="${user.avatar}" class="rounded"
-                                alt="${user.name}" />
-                            <i>10:02</i>
-                        </div>
-                        <div class="conversation-text">
-                            <div class="ctext-wrap">
-                                <i>${user.name}</i>
-                                <p>
-                                    Wow that's great
-                                </p>
-                            </div>
-                        </div>
-                        <div class="conversation-actions dropdown">
-                            <button class="btn btn-sm btn-link" data-bs-toggle="dropdown"
-                                aria-expanded="false"><i
-                                    class="mdi mdi-dots-vertical font-16"></i></button>
-
-                            <div class="dropdown-menu">
-                                <a class="dropdown-item" href="#">Copy Message</a>
-                                <a class="dropdown-item" href="#">Edit</a>
-                                <a class="dropdown-item" href="#">Delete</a>
-                            </div>
-                        </div>
-                    </li>
-                    <li class="clearfix">
-                        <div class="chat-avatar">
-                            <img src="/assets/images/users/user-5.jpg" alt="James Z"
-                                class="rounded" />
-                            <i>10:02</i>
-                        </div>
-                        <div class="conversation-text">
-                            <div class="ctext-wrap">
-                                <i>James Z</i>
-                                <p>
-                                    Let's have it today if you are free
-                                </p>
-                            </div>
-                        </div>
-                        <div class="conversation-actions dropdown">
-                            <button class="btn btn-sm btn-link" data-bs-toggle="dropdown"
-                                aria-expanded="false"><i
-                                    class="mdi mdi-dots-vertical font-16"></i></button>
-
-                            <div class="dropdown-menu dropdown-menu-end">
-                                <a class="dropdown-item" href="#">Copy Message</a>
-                                <a class="dropdown-item" href="#">Edit</a>
-                                <a class="dropdown-item" href="#">Delete</a>
-                            </div>
-                        </div>
-                    </li>
-                    <li class="clearfix odd">
-                        <div class="chat-avatar">
-                            <img src="${user.avatar}" alt="${user.name}"
-                                class="rounded" />
-                            <i>10:03</i>
-                        </div>
-                        <div class="conversation-text">
-                            <div class="ctext-wrap">
-                                <i>${user.name}</i>
-                                <p>
-                                    Sure thing! let me know if 2pm works for you
-                                </p>
-                            </div>
-                        </div>
-                        <div class="conversation-actions dropdown">
-                            <button class="btn btn-sm btn-link" data-bs-toggle="dropdown"
-                                aria-expanded="false"><i
-                                    class="mdi mdi-dots-vertical font-16"></i></button>
-
-                            <div class="dropdown-menu">
-                                <a class="dropdown-item" href="#">Copy Message</a>
-                                <a class="dropdown-item" href="#">Edit</a>
-                                <a class="dropdown-item" href="#">Delete</a>
-                            </div>
-                        </div>
-                    </li>
-                    <li class="clearfix">
-                        <div class="chat-avatar">
-                            <img src="/assets/images/users/user-5.jpg" alt="James Z"
-                                class="rounded" />
-                            <i>10:04</i>
-                        </div>
-                        <div class="conversation-text">
-                            <div class="ctext-wrap">
-                                <i>James Z</i>
-                                <p>
-                                    Sorry, I have another meeting scheduled at 2pm. Can we have it
-                                    at 3pm instead?
-                                </p>
-                            </div>
-                        </div>
-                        <div class="conversation-actions dropdown">
-                            <button class="btn btn-sm btn-link" data-bs-toggle="dropdown"
-                                aria-expanded="false"><i
-                                    class="mdi mdi-dots-vertical font-16"></i></button>
-
-                            <div class="dropdown-menu dropdown-menu-end">
                                 <a class="dropdown-item" href="#">Copy Message</a>
                                 <a class="dropdown-item" href="#">Edit</a>
                                 <a class="dropdown-item" href="#">Delete</a>
@@ -458,13 +374,13 @@
                     </li>
                     <li class="clearfix odd">
                         <div class="chat-avatar">
-                            <img src="${user.avatar}" alt="${user.name}"
+                            <img src="/assets/images/users/user-2.jpg" alt="User Name"
                                 class="rounded" />
                             <i>10:05</i>
                         </div>
                         <div class="conversation-text">
                             <div class="ctext-wrap">
-                                <i>${user.name}</i>
+                                <i>User Name</i>
                                 <p>
                                     3pm it is. Sure, let's discuss about presentation format, it
                                     would be great to finalize today. I am attaching the last year
@@ -509,8 +425,9 @@
                             </div>
                         </div>
                     </li>
+                    `;
+            html += `;
                 </ul>
-
                 <div class="row">
                     <div class="col">
                         <div class="mt-2 bg-light p-3 rounded">
@@ -546,6 +463,180 @@
             $('#conversation').html(html);
             $('#conversation').removeClass('d-none');
         }
+        // function createChatMessage(data) {
+
+        //     let messages = data.messages;
+        //     let html = `
+    //         <ul class="conversation-list" data-simplebar style="max-height: 460px;">
+    //             <li class="clearfix">
+    //                 <div class="chat-avatar">
+    //                     <img src="/assets/images/users/user-5.jpg" class="rounded"
+    //                         alt="James Z" />
+    //                     <i>10:00</i>
+    //                 </div>
+    //                 <div class="conversation-text">
+    //                     <div class="ctext-wrap">
+    //                         <i>James Z</i>
+    //                         <p>
+    //                             Hello!
+    //                         </p>
+    //                     </div>
+    //                 </div>
+    //                 <div class="conversation-actions dropdown">
+    //                     <button class="btn btn-sm btn-link" data-bs-toggle="dropdown"
+    //                         aria-expanded="false"><i
+    //                             class="mdi mdi-dots-vertical font-16"></i></button>
+
+    //                     <div class="dropdown-menu dropdown-menu-end">
+    //                         <a class="dropdown-item" href="#">Copy Message</a>
+    //                         <a class="dropdown-item" href="#">Edit</a>
+    //                         <a class="dropdown-item" href="#">Delete</a>
+    //                     </div>
+    //                 </div>
+    //             </li>
+    //             <li class="clearfix odd">
+    //                 <div class="chat-avatar">
+    //                     <img src="/assets/images/users/user-2.jpg" class="rounded"
+    //                         alt="User Name" />
+    //                     <i>10:01</i>
+    //                 </div>
+    //                 <div class="conversation-text">
+    //                     <div class="ctext-wrap">
+    //                         <i>User Name</i>
+    //                         <p>
+    //                             Hi, How are you? What about our next meeting?
+    //                         </p>
+    //                     </div>
+    //                 </div>
+    //                 <div class="conversation-actions dropdown">
+    //                     <button class="btn btn-sm btn-link" data-bs-toggle="dropdown"
+    //                         aria-expanded="false"><i
+    //                             class="mdi mdi-dots-vertical font-16"></i></button>
+
+    //                     <div class="dropdown-menu">
+    //                         <a class="dropdown-item" href="#">Copy Message</a>
+    //                         <a class="dropdown-item" href="#">Edit</a>
+    //                         <a class="dropdown-item" href="#">Delete</a>
+    //                     </div>
+    //                 </div>
+    //             </li>
+    //             <li class="clearfix">
+    //                 <div class="chat-avatar">
+    //                     <img src="/assets/images/users/user-5.jpg" alt="James Z"
+    //                         class="rounded" />
+    //                     <i>10:04</i>
+    //                 </div>
+    //                 <div class="conversation-text">
+    //                     <div class="ctext-wrap">
+    //                         <i>James Z</i>
+    //                         <p>
+    //                             We can also discuss about the presentation talk format if you
+    //                             have some extra mins
+    //                         </p>
+    //                     </div>
+    //                 </div>
+    //                 <div class="conversation-actions dropdown">
+    //                     <button class="btn btn-sm btn-link" data-bs-toggle="dropdown"
+    //                         aria-expanded="false"><i
+    //                             class="mdi mdi-dots-vertical font-16"></i></button>
+
+    //                     <div class="dropdown-menu dropdown-menu-end">
+    //                         <a class="dropdown-item" href="#">Copy Message</a>
+    //                         <a class="dropdown-item" href="#">Edit</a>
+    //                         <a class="dropdown-item" href="#">Delete</a>
+    //                     </div>
+    //                 </div>
+    //             </li>
+    //             <li class="clearfix odd">
+    //                 <div class="chat-avatar">
+    //                     <img src="/assets/images/users/user-2.jpg" alt="User Name"
+    //                         class="rounded" />
+    //                     <i>10:05</i>
+    //                 </div>
+    //                 <div class="conversation-text">
+    //                     <div class="ctext-wrap">
+    //                         <i>User Name</i>
+    //                         <p>
+    //                             3pm it is. Sure, let's discuss about presentation format, it
+    //                             would be great to finalize today. I am attaching the last year
+    //                             format and assets here...
+    //                         </p>
+    //                     </div>
+    //                     <div class="card mt-2 mb-1 shadow-none border text-start">
+    //                         <div class="p-2">
+    //                             <div class="row align-items-center">
+    //                                 <div class="col-auto">
+    //                                     <div class="avatar-sm">
+    //                                         <span class="avatar-title bg-primary rounded">
+    //                                             .ZIP
+    //                                         </span>
+    //                                     </div>
+    //                                 </div>
+    //                                 <div class="col ps-0">
+    //                                     <a href="javascript:void(0);"
+    //                                         class="text-muted fw-bold">UBold-sketch.zip</a>
+    //                                     <p class="mb-0">2.3 MB</p>
+    //                                 </div>
+    //                                 <div class="col-auto">
+    //                                     <!-- Button -->
+    //                                     <a href="javascript:void(0);"
+    //                                         class="btn btn-link btn-lg text-muted">
+    //                                         <i class="dripicons-download"></i>
+    //                                     </a>
+    //                                 </div>
+    //                             </div>
+    //                         </div>
+    //                     </div>
+    //                 </div>
+    //                 <div class="conversation-actions dropdown">
+    //                     <button class="btn btn-sm btn-link" data-bs-toggle="dropdown"
+    //                         aria-expanded="false"><i
+    //                             class="mdi mdi-dots-vertical font-16"></i></button>
+
+    //                     <div class="dropdown-menu">
+    //                         <a class="dropdown-item" href="#">Copy Message</a>
+    //                         <a class="dropdown-item" href="#">Edit</a>
+    //                         <a class="dropdown-item" href="#">Delete</a>
+    //                     </div>
+    //                 </div>
+    //             </li>
+    //         </ul>
+
+    //         <div class="row">
+    //             <div class="col">
+    //                 <div class="mt-2 bg-light p-3 rounded">
+    //                     <form class="needs-validation" novalidate="" name="chat-form"
+    //                         id="chat-form">
+    //                         <div class="row">
+    //                             <div class="col mb-2 mb-sm-0">
+    //                                 <input type="text" class="form-control border-0"
+    //                                     placeholder="Enter your text" required="" />
+    //                                 <div class="invalid-feedback">
+    //                                     Please enter your messsage
+    //                                 </div>
+    //                             </div>
+    //                             <div class="col-sm-auto">
+    //                                 <div class="btn-group">
+    //                                     <a href="#" class="btn btn-light"><i
+    //                                             class="fe-paperclip"></i></a>
+    //                                     <button type="submit"
+    //                                         class="btn btn-success chat-send w-100"><i
+    //                                             class="fe-send"></i></button>
+    //                                 </div>
+    //                             </div>
+    //                             <!-- end col -->
+    //                         </div>
+    //                         <!-- end row-->
+    //                     </form>
+    //                 </div>
+    //             </div>
+    //             <!-- end col-->
+    //         </div>
+    //     `;
+
+        //     $('#conversation').html(html);
+        //     $('#conversation').removeClass('d-none');
+        // }
 
         // function to get the chat messages
 

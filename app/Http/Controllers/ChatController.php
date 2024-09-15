@@ -13,7 +13,6 @@ class ChatController extends Controller
     public function index()
     {
         $user = Auth::user();
-        // $users = User::where('id', '!=', $user->id)->get();
         $chats = $user->chats()
             ->with('participants')
             ->withCount('messages')
@@ -28,41 +27,16 @@ class ChatController extends Controller
         return $this->sendSuccessResponse($user, 'User fetched successfully', Response::HTTP_OK);
     }
 
-
-
     public function createChatScene(Chat $chat)
     {
-        $chat->load(['participants']);
-        return $this->sendSuccessResponse($chat, 'New chat created successfully', Response::HTTP_CREATED);
+        $chat->load([
+            'participants',
+            'messages' => function ($query) {
+                $query->latest()->limit(10)->with('user');
+            }
+        ]);
+        return $this->sendSuccessResponse($chat, 'Chat reterived successfully', Response::HTTP_CREATED);
     }
-    // public function createChatScene(User $user)
-    // {
-    //     $authUser = Auth::user();
-
-    //     // Check if a chat already exists between the authenticated user and the recipient
-    //     $existingChat = $authUser->chats()
-    //         ->whereHas('participants', function ($query) use ($user) {
-    //             $query->where('user_id', $user->id);
-    //         })
-    //         ->where('is_group', false) // Only check for individual chats, not group chats
-    //         ->first();
-
-    //     if ($existingChat) {
-    //         return $this->sendSuccessResponse($existingChat, 'Chat already exists', Response::HTTP_OK);
-    //     }
-
-    //     // If no chat exists, create a new one
-    //     $newChat = $authUser->chats()->create([
-    //         'name' => $user->name,
-    //         'logo' => $user->avatar,
-    //         'is_group' => false,
-    //     ]);
-
-    //     // Attach both users (authenticated and recipient) to the chat
-    //     $newChat->participants()->attach([$authUser->id, $user->id]);
-
-    //     return $this->sendSuccessResponse($newChat, 'New chat created successfully', Response::HTTP_CREATED);
-    // }
 
 
     public function search(Request $request)
@@ -83,7 +57,6 @@ class ChatController extends Controller
             ->get();
         return $this->sendSuccessResponse($chats, 'Chats fetched successfully', Response::HTTP_OK);
     }
-
 
     public function createGroupChat(Request $request)
     {
@@ -113,7 +86,6 @@ class ChatController extends Controller
 
         return response()->json($message);
     }
-
 
     public function getUsers()
     {
