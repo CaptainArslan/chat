@@ -124,6 +124,34 @@
                 var chatId = $(this).data('chat');
                 createScene(chatId);
             });
+
+            $('body').on('submit', '#send-message', function(e) {
+                e.preventDefault();
+                var form = $(this);
+                var url = form.attr('action');
+                var formData = new FormData(this);
+                FormData.append('_token', '{{ csrf_token() }}');
+                formData.append('type', 'text');
+
+                $.ajax({
+                    type: "POST",
+                    url: url,
+                    data: formData,
+                    dataType: 'json',
+                    success: function(response) {
+                        if (response.success) {
+                            // createChatMessage(response.data);
+                            console.log(response.data);
+                        } else {
+                            console.error(response.message);
+                        }
+                    },
+                    error: function(error) {
+                        console.error(error);
+                    }
+                });
+            });
+
         });
 
         // function to search users
@@ -368,15 +396,15 @@
                     `;
 
             $action = '{{ route('send.message', ':id') }}'.replace(':id', data.id);
-                html += `;
+            token = '{{ csrf_field() }}';
+            html += `;
                 </ul>
                 <div class="row">
                     <div class="col">
                         <div class="mt-2 bg-light p-3 rounded">
                             <form class="needs-validation" id="send-message" novalidate="" name="chat-form"
                                 action="${$action}" method="POST">
-                                {{ csrf_token() }}
-                                id="chat-form">
+                                ${token}
                                 <div class="row">
                                     <div class="col mb-2 mb-sm-0">
                                         <input type="text" class="form-control border-0" name="message"
@@ -394,13 +422,10 @@
                                                     class="fe-send"></i></button>
                                         </div>
                                     </div>
-                                    <!-- end col -->
                                 </div>
-                                <!-- end row-->
                             </form>
                         </div>
                     </div>
-                    <!-- end col-->
                 </div>
             `;
 
@@ -463,31 +488,6 @@
             // Return the original string if it's within the limit
             return str;
         }
-
-
-        $('send-message').submit(function (e) {
-            e.preventDefault();
-            var form = $(this);
-            var url = form.attr('action');
-            var data = form.serialize();
-            $.ajax({
-                type: "POST",
-                url: url,
-                data: data,
-                dataType: 'json',
-                success: function (response) {
-                    if (response.success) {
-                        .
-                        (response.data);
-                    } else {
-                        console.error(response.message);
-                    }
-                },
-                error: function (error) {
-                    console.error(error);
-                }
-            });
-        });
     </script>
 
 @endsection

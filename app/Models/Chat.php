@@ -75,8 +75,8 @@ class Chat extends Model
     public function getlastMessage()
     {
         $message = $this->messages()->latest()->first();
-        $messages = $message->message;
-        if ($message->type != 'text') {
+        $messages = $message?->message;
+        if ($message && $message->type != 'text') {
             $messages = $message->type;
         }
         return $messages;
@@ -85,6 +85,6 @@ class Chat extends Model
 
     public function getlastMessageTime()
     {
-        return $this->messages()->latest()->first()->created_at->diffForHumans();
+        return $this->messages()?->latest()?->first()?->created_at->diffForHumans();
     }
 }

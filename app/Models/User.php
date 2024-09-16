@@ -26,7 +26,7 @@ class User extends Authenticatable
         'password',
         'avatar',
         'active',
-        
+
     ];
 
     /**
@@ -64,6 +64,17 @@ class User extends Authenticatable
     public function messages(): HasMany
     {
         return $this->hasMany(Message::class);
+    }
+
+    public function readMessages(): BelongsToMany
+    {
+        return $this->belongsToMany(Message::class, 'message_read_status')
+            ->withTimestamps()->withPivot('read_at');
+    }
+
+    public function readBy(Message $message): bool
+    {
+        return $this->readMessages()->where('message_id', $message->id)->exists();
     }
 
 

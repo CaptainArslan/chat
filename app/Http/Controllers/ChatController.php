@@ -77,13 +77,15 @@ class ChatController extends Controller
         $message = $chat->messages()->create([
             'user_id' => $user->id,
             'message' => $request->input('message'),
+            'attachment' => $request->input('attachment'),
+            'type' => $request->input('type'),
         ]);
 
         // Mark all users except the sender as "unread"
-        $chat->participants()->where('user_id', '!=', $user->id)
-            ->each(function ($user) use ($message) {
-                $user->readBy()->attach($message->id, ['read_at' => null]);
-            });
+        // $chat->participants()->where('user_id', '!=', $user->id)
+        //     ->each(function ($user) use ($message) {
+        //         $user->readMessages()->attach($message->id, ['read_at' => null]);
+        //     });
 
         return $this->sendSuccessResponse($message, 'Message sent successfully', Response::HTTP_CREATED);
     }
