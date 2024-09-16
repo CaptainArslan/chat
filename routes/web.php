@@ -13,9 +13,11 @@ Route::middleware('auth')->group(function () {
     Route::Post('/search/users', [ChatController::class, 'search'])->name('search.user');
     Route::get('get/user/{user}',  [ChatController::class, 'getUser'])->name('get.user');
     Route::get('create/{chat}/chat/scene',  [ChatController::class, 'createChatScene'])->name('create.chat.scene');
+
+    Route::post('/chats/{chat}/messages', [ChatController::class, 'sendMessage'])->name('send.message');
+
     Route::get('/chats', [ChatController::class, 'chats'])->name('chats');
     Route::post('/chats', [ChatController::class, 'createGroupChat'])->name('chats.create');
-    Route::post('/chats/{chat}/messages', [ChatController::class, 'sendMessage'])->name('chats.messages.create');
     Route::get('/users', [ChatController::class, 'getUsers'])->name('users');
 });
 

@@ -9,7 +9,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 class Message extends Model
 {
     use HasFactory;
-    protected $fillable = ['message', 'attachment', 'type', 'chat_id', 'user_id'];
+    protected $fillable = ['message', 'attachment_name', 'attachment', 'type', 'chat_id', 'user_id'];
 
     protected $appends = ['created_at_human'];
 

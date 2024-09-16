@@ -17,6 +17,7 @@ class ChatController extends Controller
             ->with('participants')
             ->withCount('messages')
             ->latest()
+            ->orderBy('updated_at', 'desc')
             ->get();
 
         return view('dashboard', get_defined_vars());
@@ -84,7 +85,7 @@ class ChatController extends Controller
                 $user->readBy()->attach($message->id, ['read_at' => null]);
             });
 
-        return response()->json($message);
+        return $this->sendSuccessResponse($message, 'Message sent successfully', Response::HTTP_CREATED);
     }
 
     public function getUsers()
